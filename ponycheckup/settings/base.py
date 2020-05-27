@@ -3,6 +3,8 @@ from django.core.exceptions import ImproperlyConfigured
 from unipath import Path
 
 PROJECT_DIR = Path(__file__).ancestor(3)
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = False
 TEMPLATE_DEBUG = False
@@ -23,27 +25,58 @@ USE_TZ = False
 MEDIA_ROOT = PROJECT_DIR.child("media")
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = PROJECT_DIR.child("static")
+# STATIC_ROOT = PROJECT_DIR.child("static")
+# STATIC_URL = "/static/"
+
+# STATICFILES_DIRS = (PROJECT_DIR.child("assets"),)
+
+# STATICFILES_FINDERS = (
+#     "django.contrib.staticfiles.finders.FileSystemFinder",
+#     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+# )
+
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    PROJECT_DIR.child("assets"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATICFILES_DIRS = (PROJECT_DIR.child("assets"),)
-
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-)
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-)
+# TEMPLATE_LOADERS = (
+#     "django.template.loaders.filesystem.Loader",
+#     "django.template.loaders.app_directories.Loader",
+# )
 
-MIDDLEWARE_CLASSES = (
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+            ],
+        },
+    },
+]
+
+# MIDDLEWARE_CLASSES = (
+#     "django.middleware.common.CommonMiddleware",
+#     "django.middleware.csrf.CsrfViewMiddleware",
+#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+# )
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-)
+]
+
 
 ROOT_URLCONF = "ponycheckup.urls"
 
@@ -68,6 +101,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.sessions",
     "django_extensions",
     "ponycheckup.check",
 )

@@ -5,10 +5,11 @@ import struct
 import socket
 import time
 import select
+import codecs
 
 
 def h2bin(x):
-    return x.replace(" ", "").replace("\n", "").decode("hex")
+    return codecs.decode(x.replace(" ", "").replace("\n", ""), "hex")
 
 
 hello = h2bin(
@@ -55,9 +56,9 @@ def recvall(s, length, timeout=5):
             # EOF?
             if not data:
                 return None
-            rdata += data
+            rdata += data.decode()
             remain -= len(data)
-    return rdata
+    return rdata.encode()
 
 
 def recvmsg(s):
@@ -107,4 +108,4 @@ def test_heartbleed(url):
 
 
 if __name__ == "__main__":
-    print test_heartbleed("securedjango.com")
+    print(test_heartbleed("securedjango.com"))

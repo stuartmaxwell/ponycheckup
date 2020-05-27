@@ -9,19 +9,19 @@
 <meta name="d1dda1db90403cd6f18ccd4d76d832462411f034" content="546821ac1000f87012cfbf69d55e196e2629e324" />
 
     <!-- Le styles -->
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
     <style>
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{% static "js/jquery.min.js" %}"></script>
 
 
 </head>
@@ -58,6 +58,6 @@
         </p>
     </footer>
 </div> <!-- /container -->
-<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-min.js"></script>
+<script src="{% static "bootstrap/js/bootstrap-min.js" %}"></script>
 </body>
 </html>
