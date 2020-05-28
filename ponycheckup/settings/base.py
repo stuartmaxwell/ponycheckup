@@ -6,7 +6,7 @@ PROJECT_DIR = Path(__file__).ancestor(3)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 ADMINS = (("Stuart Maxwell", "stuart@amanzi.nz"),)
@@ -69,6 +69,7 @@ TEMPLATES = [
 # )
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -102,6 +103,7 @@ INSTALLED_APPS = (
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "whitenoise.runserver_nostatic",
     "django_extensions",
     "ponycheckup.check",
 )

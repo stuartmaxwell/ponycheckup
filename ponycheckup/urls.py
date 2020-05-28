@@ -23,6 +23,6 @@ urlpatterns = [
 #     # url(r'^admin/', include(admin.site.urls)),
 # ]
 # if settings.dev.DEBUG:
-import debug_toolbar
+#import debug_toolbar
 
-urlpatterns = [path("__debug__/", include(debug_toolbar.urls)),] + urlpatterns
+#urlpatterns = [path("__debug__/", include(debug_toolbar.urls)),] + urlpatterns
