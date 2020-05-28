@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED 1
 
 # Install pip requirements
 ADD requirements.txt .
-RUN python -m pip install -r requirements/productino.txt
+RUN python -m pip install -r requirements/production.txt
 
 WORKDIR /app
 ADD . /app
