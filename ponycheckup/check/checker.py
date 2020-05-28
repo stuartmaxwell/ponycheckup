@@ -89,7 +89,7 @@ class SecurityChecker(object):
         )
         return (
             "You're seeing this error because you have <code>DEBUG = True</code>"
-            in data.content
+            in data.content.decode()
         )
 
     def check_trace(self, url):
@@ -103,7 +103,7 @@ class SecurityChecker(object):
         response = self.session.get(url + "/admin", timeout=7)
         if response.status_code == 404:
             return (False, None)
-        data = response.content.lower()
+        data = response.content.lower().decode()
         admin_found = '"id_username"' in data and (
             "csrfmiddlewaretoken" in data
             or "Django" in data
