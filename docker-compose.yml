@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  ponycheckup:
+    image: ponycheckup
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8150
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - NAME=${NAME}
+      - USER=${USER}
+      - PASSWORD=${PASSWORD}
+      - HOST=${HOST}
+      - PORT=${PORT}
