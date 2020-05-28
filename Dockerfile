@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Install pip requirements
-ADD requirements.txt .
+ADD requirements/production.txt .
 RUN python -m pip install -r requirements/production.txt
 
 WORKDIR /app
